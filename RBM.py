@@ -15,13 +15,13 @@ class RestrictedBoltzmannMachine(torch.nn.Module):
             size=(self.visible_units, 1), device=self.device)
 
     def hidden_to_visible(self, hidden):
-        if hidden.shape[1] == 1:
+        if hidden.shape[1] == 1:  # Single datapoint
             return torch.matmul(torch.transpose(self.W, 0, 1), hidden) + self.b
         _ones = torch.ones(size=(1, hidden.shape[0]), device=self.device)
         return torch.matmul(hidden, self.W) + torch.transpose(torch.matmul(self.b, _ones), 0, 1)
 
     def visible_to_hidden(self, visible):
-        if visible.shape[1] == 1:
+        if visible.shape[1] == 1:  # Single datapoint
             return torch.matmul(self.W, visible) + self.c
         _ones = torch.ones(size=(1, visible.shape[0]), device=self.device)
         return torch.matmul(visible, torch.transpose(self.W, 0, 1)) + torch.transpose(torch.matmul(self.c, _ones), 0, 1)
