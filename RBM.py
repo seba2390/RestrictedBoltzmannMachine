@@ -100,5 +100,5 @@ class RestrictedBoltzmannMachine(torch.nn.Module):
             # Getting P(v_t|h_t)
             P_v_t = torch.sigmoid_(self.hidden_to_visible(hidden=_h_t))
             # Sampling v_t ~ P(h_t|v_t)
-            _v_t = self.sample(P_v_t)
+            #_v_t = self.sample(P_v_t)
         return _v_t.flatten()
