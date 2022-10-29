@@ -5,6 +5,7 @@ of digits being flattened and 'binarized' according to floor(array/max(array)), 
 of RBM's can be found in [[1]](#1).
 
 #### RBM progress on one digit:
+(sampled using Gibbs sampling w. only one repetition at end of each epoch)
 ![alt text](https://github.com/seba2390/RestrictedBoltzmannMachine/blob/main/media/RBM_capture.gif "bRBM")
 
 ## References
