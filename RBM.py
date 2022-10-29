@@ -10,6 +10,9 @@ class RestrictedBoltzmannMachine(torch.nn.Module):
         self.hidden_units = hidden_units
         self.visible_units = visible_units
 
+        self.save_history = True
+        self.history = []
+
         self.W = torch.rand(size=(self.hidden_units, self.visible_units), device=self.device)
         self.c, self.b = torch.zeros(size=(self.hidden_units, 1), device=self.device), torch.zeros(
             size=(self.visible_units, 1), device=self.device)
@@ -86,6 +89,8 @@ class RestrictedBoltzmannMachine(torch.nn.Module):
                 self.c += lr * (delta_c / float(batch_size))
                 self.b += lr * (delta_b / float(batch_size))
                 self.W += lr * (delta_W / float(batch_size))
+            if self.save_history:
+                self.history.append(self.gibbs_sample(_v=dataset[torch.randperm(36)], steps=1))
 
     def gibbs_sample(self, _v, steps: int = 1):
         """sampling input w. current parameters"""
@@ -94,11 +99,11 @@ class RestrictedBoltzmannMachine(torch.nn.Module):
         _v_t = _v_0
         for k_step in range(0, steps):
             # Getting P(h_t|v_t)
-            P_h_t = torch.sigmoid_(self.visible_to_hidden(visible=_v_t))
+            P_h_t = torch.sigmoid(self.visible_to_hidden(visible=_v_t))
             # Sampling h_t ~ P(h_t|v_t)
             _h_t = self.sample(P_h_t)
             # Getting P(v_t|h_t)
-            P_v_t = torch.sigmoid_(self.hidden_to_visible(hidden=_h_t))
+            P_v_t = torch.sigmoid(self.hidden_to_visible(hidden=_h_t))
             # Sampling v_t ~ P(h_t|v_t)
-            #_v_t = self.sample(P_v_t)
-        return _v_t.flatten()
+            _v_t = self.sample(P_v_t)
+        return P_v_t
