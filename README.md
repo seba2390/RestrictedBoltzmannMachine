@@ -4,6 +4,9 @@ training. The bRBM is applied on the infamous MNIST handwritten digits dataset, 
 of digits being flattened and 'binarized' according to floor(array/max(array)), prior to training. General theory about the construction and training
 of RBM's can be found in [[1]](#1).
 
+#### RBM progress on one digit:
+![alt text](https://github.com/seba2390/RestrictedBoltzmannMachine/blob/main/media/RBM_capture.gif "bRBM")
+
 ## References
 <a id="1">[1]</a> 
 Fischer, A., Igel, C.
