@@ -6,6 +6,6 @@ of RBM's can be found in [[1]](#1).
 
 ## References
 <a id="1">[1]</a> 
-Fischer, A., Igel, C. (2014)
+Fischer, A., Igel, C.
 [Training restricted Boltzmann machines - An introduction.](https://doi.org/10.1016/j.patcog.2013.05.025).
 Pattern Recognition, Volume 47, Issue 1, 2014, Pages 25-39, ISSN 0031-3203.
