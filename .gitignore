@@ -133,3 +133,6 @@ data/
 
 # media
 Training_pictures/
+
+# MacOS
+.DS_Store
